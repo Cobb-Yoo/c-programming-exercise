@@ -31,20 +31,20 @@ double Random::nextDouble(){
 int main(){
 	Random::seed();
 	
-	cout << "1¿¡¼­ 100±îÁö ·£´ýÇÑ Á¤¼ö 10°³¸¦ Ãâ·ÂÇÕ´Ï´Ù." << endl;
+	cout << "1ì—ì„œ 100ê¹Œì§€ ëžœë¤í•œ ì •ìˆ˜ 10ê°œë¥¼ ì¶œë ¥í•©ë‹ˆë‹¤." << endl;
 	for(int i=0;i<10;i++)
 		cout << Random::nextInt(0,100) << ' ';
 	cout << endl;
 	
-	cout << "¾ËÆÄºªÀ» ·£´ýÇÏ°Ô 10°³¸¦ Ãâ·ÂÇÕ´Ï´Ù." << endl;
+	cout << "ì•ŒíŒŒë²³ì„ ëžœë¤í•˜ê²Œ 10ê°œë¥¼ ì¶œë ¥í•©ë‹ˆë‹¤." << endl;
 	for(int i=0;i<10;i++)
 		cout << Random::nextAlphabet() << ' ';
 	cout << endl;
 	
-	cout <<"·£´ýÇÑ ½Ç¼ö¸¦ 10°³¸¦ Ãâ·ÂÇÕ´Ï´Ù."<<endl;
+	cout <<"ëžœë¤í•œ ì‹¤ìˆ˜ë¥¼ 10ê°œë¥¼ ì¶œë ¥í•©ë‹ˆë‹¤."<<endl;
 	for(int i=0;i<10;i++){
 		cout << Random::nextDouble() << " ";
-		if(i == 1) cout << endl;
+		if(i == 4) cout << endl;
 	}
 	
 }
