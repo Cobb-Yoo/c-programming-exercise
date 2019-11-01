@@ -14,11 +14,13 @@ public :
 		cout << title << ' ' << price << "¿ø " << pages << " ÆäÀÌÁö" << endl;
 	}
 	string getTitle() {return title;}
-	bool operator!(){
-		if(price == 0) return true;
-		return false;
-	}
+	bool operator!();
 };
+
+bool Book::operator!(){
+	if(price == 0) return true;
+	return false;
+}
 
 int main(){
 	Book book("º­·è½ÃÀå",0,50);

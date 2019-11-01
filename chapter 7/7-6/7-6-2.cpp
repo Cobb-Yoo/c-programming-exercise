@@ -17,29 +17,29 @@ class Matrix {
 			}
 			cout << "}\n";
 		}
-		Matrix& operator+=(Matrix op2);
-		Matrix operator+(Matrix op2);
-		bool operator==(Matrix op2);
+		friend Matrix& operator+=(Matrix& op1, Matrix op2);
+		friend Matrix operator+(Matrix op1, Matrix op2);
+		friend bool operator==(Matrix op1, Matrix op2);
 };
 
-Matrix& Matrix::operator+=(Matrix op2){
+Matrix& operator+=(Matrix& op1, Matrix op2){
 	for(int i=0;i<4;i++){
-		this->arr[i] += op2.arr[i];
+		op1.arr[i] += op2.arr[i];
 	}
-	return *this;
+	return op1;
 }
 
-Matrix Matrix::operator+(Matrix op2){
+Matrix operator+(Matrix op1, Matrix op2){
 	Matrix tmp;
 	for(int i=0;i<4;i++){
-		tmp.arr[i] = this->arr[i] + op2.arr[i];
+		tmp.arr[i] = op1.arr[i] + op2.arr[i];
 	}
 	return tmp;
 }
 
-bool Matrix::operator==(Matrix op2){
+bool operator==(Matrix op1, Matrix op2){
 	for(int i=0;i<4;i++){
-		if(this->arr[i] != op2.arr[i]){
+		if(op1.arr[i] != op2.arr[i]){
 			return false;
 		}
 	}
