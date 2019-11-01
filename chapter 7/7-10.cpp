@@ -2,14 +2,18 @@
 using namespace std;
 
 class Statistics{
-	int data[10];
+	int *data;
 	int count;
 	public:
-		Statistics() {this->count=0;}
+		Statistics() {
+			this->count=0;
+			this->data = new int[10];
+		}
 		Statistics& operator<<(int n);
 		void operator>>(int &n);
 		bool operator!();
 		void operator~();
+		~Statistics() {delete [] data;}
 };
 
 Statistics& Statistics::operator<<(int n){
@@ -45,7 +49,7 @@ int main(){
 	cout << "5 개의 정수를 입력하라>>";
 	for(int i=0;i<5;i++) cin >> x[i];
 	
-	for(int i=0;i<5;i++) stat << x[i];
+	for(int i=0;i<5;i++) stat << x[i]; 
 	stat << 100 << 200;
 	~stat;
 	
