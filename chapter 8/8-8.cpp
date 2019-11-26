@@ -45,35 +45,35 @@ class Laser:public Printer{
 };
 
 void Ink::printInkJet(int pages){
-	if(this->getPages() < pages) cout << "¿ëÁö°¡ ºÎÁ·ÇÏ¿© ÇÁ¸°Æ®ÇÒ ¼ö ¾ø½À´Ï´Ù.\n";
+	if(this->getPages() < pages) cout << "ìš©ì§€ê°€ ë¶€ì¡±í•˜ì—¬ í”„ë¦°íŠ¸í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n";
 	else{
 		this->print(pages);
 		this->availableInk-=pages;
-		cout << "ÇÁ¸°Æ®ÇÏ¿´½À´Ï´Ù.\n";
+		cout << "í”„ë¦°íŠ¸í•˜ì˜€ìŠµë‹ˆë‹¤.\n";
 	}
 }
 
 void Laser::printLaser(int pages){
-	if(this->getPages() < pages) cout << "¿ëÁö°¡ ºÎÁ·ÇÏ¿© ÇÁ¸°Æ®ÇÒ ¼ö ¾ø½À´Ï´Ù.\n";
+	if(this->getPages() < pages) cout << "ìš©ì§€ê°€ ë¶€ì¡±í•˜ì—¬ í”„ë¦°íŠ¸í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n";
 	else{
 		this->print(pages);
 		this->availableToner-=1;
-		cout << "ÇÁ¸°Æ®ÇÏ¿´½À´Ï´Ù.\n";
+		cout << "í”„ë¦°íŠ¸í•˜ì˜€ìŠµë‹ˆë‹¤.\n";
 	}
 }
 
 int main(){
 	Ink *ink = new Ink("Officejet V40","HP",5,10);
-	Laser *laser = new Laser("SCX-6x45", "»ï¼ºÀüÀÚ",3,20);
+	Laser *laser = new Laser("SCX-6x45", "ì‚¼ì„±ì „ì",3,20);
 	
-	cout << "ÇöÀç ÀÛµ¿ÁßÀÎ 2 ´ëÀÇ ÇÁ¸°ÅÍ´Â ¾Æ·¡¿Í °°´Ù.\n" ;
-	cout << "À×Å©Á¬ : " << ink->getModel()<< " ," << ink->getManu() << " ,³²Àº Á¾ÀÌ" << ink->getPages() <<"Àå ,³²Àº À×Å©"<< ink->getInk() << endl;
-	cout << "·¹ÀÌÀú : " << laser->getModel()<< " ," << laser->getManu() << " ,³²Àº Á¾ÀÌ" <<laser->getPages() <<"Àå ,³²Àº Åä³Ê"<< laser->getToner() << endl << endl;
+	cout << "í˜„ì¬ ì‘ë™ì¤‘ì¸ 2 ëŒ€ì˜ í”„ë¦°í„°ëŠ” ì•„ë˜ì™€ ê°™ë‹¤.\n" ;
+	cout << "ì‰í¬ì ¯ : " << ink->getModel()<< " ," << ink->getManu() << " ,ë‚¨ì€ ì¢…ì´" << ink->getPages() <<"ì¥ ,ë‚¨ì€ ì‰í¬"<< ink->getInk() << endl;
+	cout << "ë ˆì´ì € : " << laser->getModel()<< " ," << laser->getManu() << " ,ë‚¨ì€ ì¢…ì´" <<laser->getPages() <<"ì¥ ,ë‚¨ì€ í† ë„ˆ"<< laser->getToner() << endl << endl;
 	
 	bool flag=true;
 	
-	while(flag){//'y' ÀÌ¿ÜÀÇ °ªÀ» ÀÔ·ÂÇÏ¸é ¹İº¹¹®ÀÌ ¸ØÃã. 
-		cout << "ÇÁ¸°ÅÍ(1:À×Å©Á¬, 2:·¹ÀÌÀú)¿Í ¸Å¼ö ÀÔ·Â>>";
+	while(flag){//'y' ì´ì™¸ì˜ ê°’ì„ ì…ë ¥í•˜ë©´ ë°˜ë³µë¬¸ì´ ë©ˆì¶¤. 
+		cout << "í”„ë¦°í„°(1:ì‰í¬ì ¯, 2:ë ˆì´ì €)ì™€ ë§¤ìˆ˜ ì…ë ¥>>";
 		int x,y;
 		cin >> x >> y;
 		
@@ -85,16 +85,19 @@ int main(){
 				laser->printLaser(y);
 				break;
 			default :
-				cout << "±â°è¸¦ ´Ù½Ã ¼³Á¤ÇØÁÖ¼¼¿ä.\n";
+				cout << "ê¸°ê³„ë¥¼ ë‹¤ì‹œ ì„¤ì •í•´ì£¼ì„¸ìš”.\n";
 		}
 		
-		cout << "À×Å©Á¬ : " << ink->getModel()<< " ," << ink->getManu() << " ,³²Àº Á¾ÀÌ" << ink->getPages() <<"Àå ,³²Àº À×Å©"<< ink->getInk() << endl;
-		cout << "·¹ÀÌÀú : " << laser->getModel()<< " ," << laser->getManu() << " ,³²Àº Á¾ÀÌ" <<laser->getPages() <<"Àå ,³²Àº Åä³Ê"<< laser->getToner() << endl;
-		cout << "°è¼Ó ÇÁ¸°Æ® ÇÏ½Ã°Ú½À´Ï´Ù(y/n)>>";
+		cout << "ì‰í¬ì ¯ : " << ink->getModel()<< " ," << ink->getManu() << " ,ë‚¨ì€ ì¢…ì´" << ink->getPages() <<"ì¥ ,ë‚¨ì€ ì‰í¬"<< ink->getInk() << endl;
+		cout << "ë ˆì´ì € : " << laser->getModel()<< " ," << laser->getManu() << " ,ë‚¨ì€ ì¢…ì´" <<laser->getPages() <<"ì¥ ,ë‚¨ì€ í† ë„ˆ"<< laser->getToner() << endl;
+		cout << "ê³„ì† í”„ë¦°íŠ¸ í•˜ì‹œê² ìŠµë‹ˆë‹¤(y/n)>>";
 		char tmp;
 		cin >> tmp;
 		if(tmp != 'y') flag = false;
 		
 		cout << endl;
 	}
+	
+	delete ink;
+	delete laser;
 }
