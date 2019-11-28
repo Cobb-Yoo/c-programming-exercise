@@ -41,7 +41,7 @@ class Ink:public Printer{
 	private:
 		int availableInk;
 	public:
-		Ink(string model, string manu, int pages, int availableInk):Printer(model,manu,pages){
+		Ink(string model, string manu, int pages, int availableInk):Printer(model,manu,0,pages){
 			this->availableInk = availableInk;
 		}
 		virtual void print(int pages);
@@ -86,7 +86,7 @@ class Laser:public Printer{
 	private:
 		int availableToner;
 	public:
-		Laser(string model, string manu, int pages, int availableToner):Printer(model,manu,pages){
+		Laser(string model, string manu, int pages, int availableToner):Printer(model,manu,0,pages){
 			this->availableToner = availableToner;
 		}
 		virtual void print(int pages);
@@ -109,7 +109,9 @@ class Laser:public Printer{
 void Laser::print(int pages){
 	if(pages <= this->availableCount()&&pages <= this->availableToner){
 		this->setAvailableCount(pages);
-		this->availableToner -= pages;
+		this->availableToner -= 1;
+	  //책에서 레이저 2장을 출력할때 토너가 1개만 줄어드는데 이것이 오타면 옳은 코드는
+	  //this->availableToner -= pages; 이다. 
 		this->setPrintedCount(pages);
 		cout << "프린트하였습니다.\n";
 	}
