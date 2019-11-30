@@ -4,14 +4,14 @@ using namespace std;
 class UI{//only static members
 	public:
 		static void start(){
-			cout << "±×·¡ÇÈ ¿¡µðÅÍÀÔ´Ï´Ù.\n";
+			cout << "ê·¸ëž˜í”½ ì—ë””í„°ìž…ë‹ˆë‹¤.\n";
 		}
 		static int menu(int& n){
-			cout << "»ðÀÔ:1, »èÁ¦:2, ¸ðµÎº¸±â:3, Á¾·á:4 >> ";
+			cout << "ì‚½ìž…:1, ì‚­ì œ:2, ëª¨ë‘ë³´ê¸°:3, ì¢…ë£Œ:4 >> ";
 			cin >> n;
 		}
 		static int shapeMenu(int& n){
-			cout << "¼±:1, ¿ø:2, »ç°¢Çü:3 >> ";
+			cout << "ì„ :1, ì›:2, ì‚¬ê°í˜•:3 >> ";
 			cin >> n;
 		}
 };
@@ -20,31 +20,49 @@ class Shape{
 	Shape *link;
 	string name;
 	public:
-		Shape();
+		Shape(){
+			this->link = NULL;
+			name = "";
+		}
 		virtual void show(int n)=0;
-		void setName(string name) {
-			this->name = name;
+		void setName(int n);
+		Shape *getLink(){
+			return this->link;
 		}
 };
+
+void Shape::setName(int n){
+	switch (n){
+		case 1:
+			this->name = "Line";
+			break;
+		case 2:
+			this->name = "Circle";
+			break;
+		case 3:
+			this->name = "Rect";
+			break;
+	}
+}
 
 class Line:public Shape{
 	public:
 		Line():Shape(){
-			setName("Line");
+			setName(1);
 		}
 };
 
 class Circle:public Shape{
 	public:
 		Circle():Shape(){
-			setName("Circle");
+			setName(2);
 		}
 };
 
 class Rect:public Shape{
 	public:
 		Rect():Shape(){
-			setName("Rect");
+			setName(3);
 		}
 };
 
@@ -57,9 +75,35 @@ class GraphicEditor{
 			this->pStart = NULL;
 			this->pLase = NULL;
 		}
-		void insert(int n);
-		void delete(int n);
+		void ins(int n);
+		void del(int n);
 };
+
+void GraphicEditor::ins(int n){
+	switch (n){
+		case 1:
+			Line tmp;
+			break;
+		case 2:
+			Circle tmp;
+			break;
+		case 3:
+			Rect tmp;
+			break;
+	}
+	
+	Shape *head = this->pStart;
+	
+	if(this->pStart == NULL && this->pLase == NULL){ // ë¦¬ìŠ¤íŠ¸ì— ì²˜ìŒ ì‚½ìž…í•˜ëŠ” ê²½ìš° 
+		this->pStart = tmp;
+		this->pLase = tmp;
+	}
+	else{
+		for(;;){
+			
+		}
+	} 
+}
 
 int main(){
 	GraphicEditor *graphic;
@@ -67,11 +111,13 @@ int main(){
 	
 	int n;
 	while(UI::menu(n) && n!=4){
-		switch (n):
+		switch (n){
 			case 1:
 				UI::shapeMenu(n);
-				switch (n):
+				switch (n){
 					case 1:
-						
+						break;
+				}
+		}
 	}
 }
