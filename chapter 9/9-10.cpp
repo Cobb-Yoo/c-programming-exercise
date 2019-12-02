@@ -4,14 +4,14 @@ using namespace std;
 class UI{//only static members
 	public:
 		static void start(){
-			cout << "ê·¸ë˜í”½ ì—ë””í„°ì…ë‹ˆë‹¤.\n";
+			cout << "±×·¡ÇÈ ¿¡µğÅÍÀÔ´Ï´Ù.\n";
 		}
 		static int menu(int& n){
-			cout << "ì‚½ì…:1, ì‚­ì œ:2, ëª¨ë‘ë³´ê¸°:3, ì¢…ë£Œ:4 >> ";
+			cout << "»ğÀÔ:1, »èÁ¦:2, ¸ğµÎº¸±â:3, Á¾·á:4 >> ";
 			cin >> n;
 		}
 		static int shapeMenu(int& n){
-			cout << "ì„ :1, ì›:2, ì‚¬ê°í˜•:3 >> ";
+			cout << "¼±:1, ¿ø:2, »ç°¢Çü:3 >> ";
 			cin >> n;
 		}
 };
