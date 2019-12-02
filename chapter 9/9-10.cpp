@@ -18,33 +18,40 @@ class UI{//only static members
 
 class Shape{
 	Shape *link;
-	string name;
 	public:
-		Shape();
-		virtual void show(int n)=0;
-		void setName(string name) {
-			this->name = name;
+		Shape(){
+			this->link = NULL;
+		}
+		virtual void show()=0;
+		void setLink(Shape *n){
+			this->link = n;
+		}
+		Shape *getLink(){
+			return this->link;
 		}
 };
 
 class Line:public Shape{
 	public:
-		Line():Shape(){
-			setName("Line");
+		Line():Shape(){}
+		void show(){
+			cout << ": Line\n";
 		}
 };
 
 class Circle:public Shape{
 	public:
-		Circle():Shape(){
-			setName("Circle");
+		Circle():Shape(){}
+		void show(){
+			cout << ": Circle\n";
 		}
 };
 
 class Rect:public Shape{
 	public:
-		Rect():Shape(){
-			setName("Rect");
+		Rect():Shape(){}
+		void show(){
+			cout << ": Rect\n";
 		}
 };
 
@@ -57,21 +64,68 @@ class GraphicEditor{
 			this->pStart = NULL;
 			this->pLase = NULL;
 		}
-		void insert(int n);
-		void delete(int n);
+		void ins(int n);
+		void del(int n);
+		void view();
 };
 
+void GraphicEditor::view(){
+	Shape *head = this->pStart;
+	for(;;){
+		if(head == this->pLase) break;
+		
+		head->show();
+		head = head->getLink();
+	}
+}
+
+void GraphicEditor::ins(int n){
+	Shape *tmp;
+	switch (n){
+		case 1:
+			tmp = new Line;
+			break;
+		case 2:
+			tmp = new Circle;
+			break;
+		case 3:
+			tmp = new Rect;
+			break;
+	}
+	
+	
+	if(this->pStart == NULL && this->pLase == NULL){ // 리스트에 처음 삽입하는 경우 
+		this->pStart->setLink(tmp);
+		this->pLase->setLink(tmp)z;
+	}
+	else{
+		for(;;){
+			if(this->pStart->getLink() == NULL){
+				this->pStart->setLink(tmp);
+				this->pLase->setLink(tmp);
+			}
+			else {
+				this->pStart = this->pStart->getLink();
+			}
+		}
+	} 
+}
+
 int main(){
-	GraphicEditor *graphic;
-	graphic = new GraphicEditor();
+	GraphicEditor *graphic = new GraphicEditor();
 	
 	int n;
 	while(UI::menu(n) && n!=4){
-		switch (n):
-			case 1:
+		switch (n){
+			case 1://삽입 
 				UI::shapeMenu(n);
-				switch (n):
-					case 1:
-						
+				graphic->ins(n);
+				break;
+			case 2: //삭제
+				break;
+			case 3: //모두보기
+				graphic->view();
+				break;
+		}
 	}
 }
