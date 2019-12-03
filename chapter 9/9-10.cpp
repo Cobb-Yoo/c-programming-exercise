@@ -9,10 +9,17 @@ class UI{//only static members
 		static int menu(int& n){
 			cout << "삽입:1, 삭제:2, 모두보기:3, 종료:4 >> ";
 			cin >> n;
+			if(n != 1 && n != 2 && n != 3 && n != 4){
+				n = 4;
+			}
 		}
 		static int shapeMenu(int& n){
 			cout << "선:1, 원:2, 사각형:3 >> ";
 			cin >> n;
+			if(n != 1 && n != 2 && n != 3){
+				cout << "올바른 값을 입력하지 않아 1 입력으로 간주합니다.\n";
+				n = 1;
+			}
 		}
 		static int deleteShape(int &n){
 			cout << "삭제하고자 하는 도형의 인덱스 >> " ;
@@ -26,6 +33,7 @@ class Shape{
 		Shape(){
 			this->link = NULL;
 		}
+		virtual ~Shape(){}
 		virtual void show()=0;
 		void setLink(Shape *n){
 			this->link = n;
@@ -38,6 +46,7 @@ class Shape{
 class Line:public Shape{
 	public:
 		Line():Shape(){}
+		virtual ~Line(){}
 		void show(){
 			cout << ": Line\n";
 		}
@@ -46,6 +55,7 @@ class Line:public Shape{
 class Circle:public Shape{
 	public:
 		Circle():Shape(){}
+		virtual ~Circle(){}
 		void show(){
 			cout << ": Circle\n";
 		}
@@ -54,6 +64,7 @@ class Circle:public Shape{
 class Rect:public Shape{
 	public:
 		Rect():Shape(){}
+		virtual ~Rect(){}
 		void show(){
 			cout << ": Rect\n";
 		}
@@ -69,6 +80,11 @@ class GraphicEditor{
 			this->pStart = NULL;
 			this->pLast = NULL;
 			len = 0;
+		}
+		~GraphicEditor(){ // 연결리스트에 있는 메모리 반환. 
+			while(len!=0){
+				this->del(0);
+			}
 		}
 		void ins(int n);
 		void del(int n);
@@ -111,7 +127,7 @@ void GraphicEditor::ins(int n){
 		this->pStart = tmp;
 		this->pLast = tmp;
 	}
-	else{// 여기를 바꿔야함 처음에 넣는건 잘 되는데 그 이후가 문제임 
+	else{
 		Shape *head = this->pStart;
 		for(;;){
 			if(head->getLink() == NULL){
@@ -126,11 +142,13 @@ void GraphicEditor::ins(int n){
 	}
 };
 
-void GraphicEditor::del(int n){//? 왜 연결이 안되는 것이야 
+void GraphicEditor::del(int n){
 	Shape *head = this->pStart;
 	if(n == 0){
 		this->pStart = this->pStart->getLink();
 		this->lenD();
+		
+		if(this->getLen() == 0) this->pStart = this->pLast = NULL;
 	}
 	else if(n == this->getLen()-1){
 		for(int i=0;i<n-1;i++) head = head->getLink();
@@ -162,11 +180,18 @@ int main(){
 				break;
 			case 2: //삭제
 				UI::deleteShape(n);
-				graphic->del(n);
+				if(0 <= n && n <= graphic->getLen()-1){
+					graphic->del(n);
+				}
+				else{
+					cout << "올바른 값을 입력하지 않았습니다.\n";
+				}
+				
 				break;
 			case 3: //모두보기
 				graphic->view();
 				break;
-		}
+		}	
 	}
+	delete graphic;
 }

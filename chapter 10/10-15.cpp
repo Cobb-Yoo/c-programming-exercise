@@ -27,13 +27,13 @@ class UI{
 
 void UI::INSERT(){
 	cout << "생성하고자 하는 원의 반지름과 이름은 >> ";
-	cin >> radius >> name;
+	cin >> radius >> name;//둘다 전역. 
 	arr.push_back(new Circle(radius, name));
 }
 
 void UI::DELETE(){
 	cout << "삭제하고자 하는 원의 이름은 >> ";
-	cin >> name;
+	cin >> name;//전역 .
 		
 	vector<Circle*>::iterator it = arr.begin();
 	while(it != arr.end()) {
@@ -72,6 +72,9 @@ int main(){
 		}
 		else if(n==3){
 			UI::DISPLAY();
+		}
+		else{
+			cout << "입력값을 확인하세요.\n";
 		}
 		cout << "삽입:1, 삭제:2, 모두보기:3, 종료:4  >> ";
 	}

@@ -14,6 +14,7 @@ class Printer{
 			this->printedCount = printedCount;
 			this->availableCount = availableCount;
 		}
+		virtual ~Printer(){}
 		virtual void print(int pages)=0;
 		virtual void show()=0;
 		
@@ -44,6 +45,7 @@ class Ink:public Printer{
 		Ink(string model, string manu, int pages, int availableInk):Printer(model,manu,0,pages){
 			this->availableInk = availableInk;
 		}
+		virtual ~Ink(){}
 		virtual void print(int pages);
 		virtual void show();
 		
@@ -89,6 +91,7 @@ class Laser:public Printer{
 		Laser(string model, string manu, int pages, int availableToner):Printer(model,manu,0,pages){
 			this->availableToner = availableToner;
 		}
+		virtual ~Laser(){}
 		virtual void print(int pages);
 		virtual void show();
 		
@@ -131,8 +134,8 @@ void Laser::show(){
 
 
 int main(){
-	Ink *ip = new Ink("Officeget V40","HP",5,10);
-	Laser *lp = new Laser("SCX-6x45","삼성전자",3,20);
+	Printer *ip = new Ink("Officeget V40","HP",5,10);
+	Printer *lp = new Laser("SCX-6x45","삼성전자",3,20);
 	
 	cout << "현재 작동중인 2대의 프린터는 아래와 같다.\n";
 	ip->show();
@@ -168,6 +171,10 @@ int main(){
 		else if(c == 'n') break;
 		else {
 			cout << "ERROR로 인해서 프린트를 멈춤니다.\n";
+			break;
 		}
 	}
+	
+	delete ip;
+	delete lp;
 }
